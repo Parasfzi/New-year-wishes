@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Year Wishes Wall</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #1e2a47;
+      color: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      margin-top: 50px;
+      color: #ff6347;
+      background: linear-gradient(45deg, #ff6347, #ffb347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    #wishContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    input, button {
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      margin: 10px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    input {
+      background: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    button {
+      background: #ff6347;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 81, 47, 0.3);
+      transition: all 0.3s ease-in-out;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 81, 47, 0.5);
+    }
+
+    #messagesContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .message {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 20px;
+      max-width: 400px;
+      text-align: center;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Confetti and Sparkle Effects */
+    .confetti {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .sparkles {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: sparkle 1.5s infinite;
+      z-index: -1;
+    }
+
+    @keyframes sparkle {
+      0% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0.5; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 New Year Wishes Wall 🎉</h1>
+  
+  <div id="wishContainer">
+    <div class="card">
+      <input type="text" id="userName" placeholder="Enter your name">
+      <input type="text" id="userWish" placeholder="Enter your New Year wish">
+      <button onclick="postMessage()">Post Your Wish</button>
+    </div>
+  </div>
+
+  <div id="messagesContainer"></div>
+
+  <!-- Confetti and Sparkles -->
+  <div class="confetti"></div>
+  <div class="sparkles">✨</div>
+
+  <script>
+    // Confetti Effect
+    function createConfetti() {
+      const confettiContainer = document.querySelector('.confetti');
+      for (let i = 0; i < 200; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.top = `${Math.random() * 100}%`;
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.width = '5px';
+        confetti.style.height = '5px';
+        confetti.style.backgroundColor = '#ff6347';
+        confetti.style.animation = `confettiFall ${Math.random() * 5 + 5}s linear infinite`;
+        confetti.style.opacity = Math.random();
+        confettiContainer.appendChild(confetti);
+      }
+    }
+
+    // Message Posting
+    function postMessage() {
+      const name = document.getElementById('userName').value;
+      const wish = document.getElementById('userWish').value;
+
+      if (!name || !wish) {
+        alert('Please enter both your name and wish!');
+        return;
+      }
+
+      const newMessage = document.createElement('div');
+      newMessage.classList.add('message');
+      newMessage.textContent = `${name}: ${wish}`;
+      document.getElementById('messagesContainer').appendChild(newMessage);
+
+      // Reset input fields
+      document.getElementById('userName').value = '';
+      document.getElementById('userWish').value = '';
+    }
+
+    // Initialize Confetti
+    createConfetti();
+  </script>
+</body>
+</html>
